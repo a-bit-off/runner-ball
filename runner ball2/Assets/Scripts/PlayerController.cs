@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
+    public EnemyAndPoint EAP;
     private Vector3 player_vector;
-    [SerializeField] private int speed;
+    [SerializeField] public float speed;
     [SerializeField] private int speedSide;
 
 
@@ -33,17 +34,17 @@ public class PlayerController : MonoBehaviour
 
     private void SwipeLeft()
     {
-        player_vector.x = (speed * -1) / 4;
+        player_vector.x = -speedSide;
     }
 
     private void SwipeRight()
     {
-        player_vector.x = speed / 4;
+        player_vector.x = speedSide;
         
     }
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        EAP.FindTag(other);
     }
 
 }
