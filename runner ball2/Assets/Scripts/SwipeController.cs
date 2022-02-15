@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SwipeController : MonoBehaviour
 {
-    public static bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
+    public static bool tap, swipeLeft, swipeRight;
     private bool isDraging = false;
     private Vector2 startTouch, swipeDelta;
 
     private void Update()
     {
-        tap = swipeDown = swipeUp = swipeLeft = swipeRight = false;
+        tap = swipeLeft = swipeRight = false;
         #region ПК-версия
         if (Input.GetMouseButtonDown(0))
         {
@@ -53,27 +53,15 @@ public class SwipeController : MonoBehaviour
         }
 
         //Проверка на пройденность расстояния
-        if (swipeDelta.magnitude > 100)
+        if (swipeDelta.magnitude > 20)
         {
             //Определение направления
             float x = swipeDelta.x;
-            float y = swipeDelta.y;
-            if (Mathf.Abs(x) > Mathf.Abs(y))
-            {
 
-                if (x < 0)
-                    swipeLeft = true;
-                else
-                    swipeRight = true;
-            }
+            if (x < 0)
+                swipeLeft = true;
             else
-            {
-
-                if (y < 0)
-                    swipeDown = true;
-                else
-                    swipeUp = true;
-            }
+                swipeRight = true;
 
             Reset();
         }

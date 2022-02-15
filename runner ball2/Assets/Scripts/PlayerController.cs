@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 player_vector;
     [SerializeField] private int speed;
+    [SerializeField] private int speedSide;
 
 
     void Start()
@@ -14,18 +15,14 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
     }
+
     private void Update()
     {
         if (SwipeController.swipeLeft)
-        {
-            player_vector.x = (speed * -1);
-            controller.Move(player_vector * Time.fixedDeltaTime);
-        }
+            SwipeLeft();
+
         if (SwipeController.swipeRight)
-        {
-            player_vector.x = speed;
-            controller.Move(player_vector * Time.fixedDeltaTime);
-        }
+            SwipeRight();
     }
 
     private void FixedUpdate()
@@ -33,5 +30,17 @@ public class PlayerController : MonoBehaviour
         player_vector.z = speed;
         controller.Move(player_vector * Time.fixedDeltaTime);
     }
-   
+
+
+    private void SwipeLeft()
+    {
+        player_vector.x = (speed * -1) / 4;
+    }
+
+    private void SwipeRight()
+    {
+        player_vector.x = speed / 4;
+        
+    }
+
 }

@@ -8,6 +8,7 @@ public class GroundGeneration : MonoBehaviour
     private float spawnPos = 0;
     private float groundLength = 100;
     private int startGrounds = 5;
+    private List<GameObject> activeGrounds = new List<GameObject>();
 
     [SerializeField] private Transform player;
 
@@ -23,15 +24,22 @@ public class GroundGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.position.z > spawnPos - (startGrounds * groundLength))
+        if(player.position.z - 60 > spawnPos - (startGrounds * groundLength))
         {
             SpawnGround(Random.Range(0, grounds.Length));
+            DeliteGround();
         }
     }
 
     private void SpawnGround(int index)
     {
-        Instantiate(grounds[index], transform.forward * spawnPos, transform.rotation);
+        GameObject nextGround = Instantiate(grounds[index], transform.forward * spawnPos, transform.rotation);
         spawnPos += groundLength;
+        activeGrounds.Add(nextGround);
+    }
+    private void DeliteGround()
+    {
+        Destroy(activeGrounds[0]);
+        activeGrounds.RemoveAt(0);
     }
 }
