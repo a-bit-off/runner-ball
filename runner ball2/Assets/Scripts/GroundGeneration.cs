@@ -12,7 +12,8 @@ public class GroundGeneration : MonoBehaviour
 
     [SerializeField] private Transform player;
 
-    // Start is called before the first frame update
+    public SpawnGameObjects SGO;
+
     void Start()
     {
         for (int i = 0; i < startGrounds; i++)
@@ -21,13 +22,13 @@ public class GroundGeneration : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(player.position.z - 60 > spawnPos - (startGrounds * groundLength))
         {
             SpawnGround(Random.Range(0, grounds.Length));
             DeliteGround();
+            SGO.SpawnPosition(player.position.z);
         }
     }
 

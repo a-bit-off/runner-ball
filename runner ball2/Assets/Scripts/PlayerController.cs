@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
     }
 
     private void Update()
@@ -41,6 +40,10 @@ public class PlayerController : MonoBehaviour
     {
         player_vector.x = speed / 4;
         
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(other.gameObject);
     }
 
 }
