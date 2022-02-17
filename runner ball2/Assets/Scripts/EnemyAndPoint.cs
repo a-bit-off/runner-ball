@@ -30,7 +30,7 @@ public class EnemyAndPoint : MonoBehaviour
             lives -= 1;
             livesText.text = "Lives: " + lives;
             if (lives < 1)
-                SM.Restart();//остановка игры
+                SM.Restart();
             
         }
         
